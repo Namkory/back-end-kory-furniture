@@ -30,12 +30,18 @@ public class Products {
 
     @Column(name = "description")
     private String description;
-
-    @Lob
     @Column(name = "thumbnail")
-    private Blob thumbnail;
+    private String thumbnail;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 }

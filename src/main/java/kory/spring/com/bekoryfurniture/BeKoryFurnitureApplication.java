@@ -1,7 +1,9 @@
 package kory.spring.com.bekoryfurniture;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class BeKoryFurnitureApplication {
@@ -10,4 +12,8 @@ public class BeKoryFurnitureApplication {
 		SpringApplication.run(BeKoryFurnitureApplication.class, args);
 	}
 
+	@Bean
+	ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 }
