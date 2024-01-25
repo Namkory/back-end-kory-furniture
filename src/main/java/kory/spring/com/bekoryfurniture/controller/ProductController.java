@@ -7,19 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @GetMapping
+    ResponseEntity<List<ProductDto>> getProducts() {
+        List<ProductDto> response = productService.getAll();
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     ResponseEntity<ProductDto> createNewProduct(@ModelAttribute ProductDtoRequest request) {
         ProductDto res = productService.createNewProduct(request);
         return ResponseEntity.ok(res);
     }
 
-    
+
 
 
 }

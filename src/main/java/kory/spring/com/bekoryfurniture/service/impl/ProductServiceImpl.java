@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,6 +58,18 @@ public class ProductServiceImpl implements ProductService {
         Products savedProduct = productRepo.save(productsEntity);
 
         ProductDto response = modelMapper.map(savedProduct, ProductDto.class);
+        return response;
+    }
+
+    @Override
+    public List<ProductDto> getAll() {
+        List<Products> entityProducts = productRepo.findAll();
+
+        List<ProductDto> response = new ArrayList<>();
+        for(int i = 0; i < entityProducts.size(); i++) {
+            ProductDto productDto = modelMapper.map(entityProducts.get(i), ProductDto.class);
+            response.add(productDto);
+        }
         return response;
     }
 }
