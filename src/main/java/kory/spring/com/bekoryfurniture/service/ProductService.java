@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProductService {
     ProductDto createNewProduct(ProductDtoRequest request) throws ResourceNotFoundException;
     List<ProductDto> getAll();
+
+    void deleteProduct(Integer productId);
 }
