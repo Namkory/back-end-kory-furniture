@@ -74,6 +74,42 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductDto getById(Integer pId) {
+        Products entity = productRepo.findById(pId).orElseThrow(() ->
+                new ResourceNotFoundException("Product khong ton tai"));
+
+        ProductDto response = modelMapper.map(entity, ProductDto.class);
+        return response;
+    }
+
+    @Override
+    public ProductDto updateProduct(ProductDtoRequest request) {
+        Products entity = productRepo.findById(request.getId()).orElseThrow(() ->
+                new ResourceNotFoundException("Product khong ton tai"));
+
+        if(request.getImage() == null) {
+            request.setThumbnail(entity.getThumbnail());
+        }
+        else {
+            String urlImage = cloudinaryImageService.uploadImage(request.getImage());
+            request.setThumbnail(urlImage);
+        }
+
+        // doan nay khi map cac field tu request qua entity thi truong category cua entity se null la
+        // do request nhan cateId con entity no la mot doi tuong Cate
+        modelMapper.map(request, entity);
+
+        Category newCate = categoryRepo.findById(request.getCategoryId()).get();
+        entity.setCategory(newCate);
+
+        Products savedProduct = productRepo.save(entity);
+
+        ProductDto res = modelMapper.map(savedProduct, ProductDto.class);
+
+        return res;
+    }
+
+    @Override
     public void deleteProduct(Integer productId) {
         productRepo.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product khong ton tai"));
 

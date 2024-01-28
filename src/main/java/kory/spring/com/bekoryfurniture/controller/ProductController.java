@@ -24,9 +24,22 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<ProductDto> getProduct(@PathVariable("id") Integer pId) {
+        ProductDto response = productService.getById(pId);
+        return ResponseEntity.ok(response);
+    }
+
+
     @PostMapping
     ResponseEntity<ProductDto> createNewProduct(@ModelAttribute ProductDtoRequest request) {
         ProductDto res = productService.createNewProduct(request);
+        return ResponseEntity.ok(res);
+    }
+
+    @PutMapping
+    ResponseEntity<ProductDto> updateProduct(@ModelAttribute ProductDtoRequest request) {
+        ProductDto res = productService.updateProduct(request);
         return ResponseEntity.ok(res);
     }
 
