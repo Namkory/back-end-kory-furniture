@@ -112,7 +112,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Integer productId) {
         productRepo.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product khong ton tai"));
-
         productRepo.deleteById(productId);
 
     }

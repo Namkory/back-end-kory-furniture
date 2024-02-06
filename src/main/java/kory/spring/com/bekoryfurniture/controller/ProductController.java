@@ -30,7 +30,6 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
-
     @PostMapping
     ResponseEntity<ProductDto> createNewProduct(@ModelAttribute ProductDtoRequest request) {
         ProductDto res = productService.createNewProduct(request);

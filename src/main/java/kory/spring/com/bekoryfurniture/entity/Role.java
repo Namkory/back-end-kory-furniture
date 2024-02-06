@@ -19,4 +19,9 @@ public class Role {
 
     @Column(name = "name")
     private String name;
+
+    // Thêm constructor nhận đối số kiểu String
+    public Role(String name) {
+        this.name = name;
+    }
 }
