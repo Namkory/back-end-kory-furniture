@@ -16,4 +16,12 @@ public class GlobalException extends RuntimeException {
         exceptionResponse.setErrorMessage(exception.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleRuntimeException(RuntimeException exception) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse();
+        exceptionResponse.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        exceptionResponse.setErrorMessage(exception.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }

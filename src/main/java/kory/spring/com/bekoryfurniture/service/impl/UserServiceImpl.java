@@ -11,11 +11,11 @@ import kory.spring.com.bekoryfurniture.repository.UserRepo;
 import kory.spring.com.bekoryfurniture.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 @AllArgsConstructor
@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserService {
         Users userEntity = modelMapper.map(request, Users.class);
         userEntity.setRole(role);
 
-        // Hash the password before saving to the database
-//        BCryptPasswordEncoder hashPassword = new BCryptPasswordEncoder();
-//        String hashedPassword = hashPassword.encode(request.getPassword());
-//        userEntity.setPassword(hashedPassword);
+//         Hash the password before saving to the database
+        BCryptPasswordEncoder hashPassword = new BCryptPasswordEncoder();
+        String hashedPassword = hashPassword.encode(request.getPassword());
+        userEntity.setPassword(hashedPassword);
 
         Users saveUser = userRepo.save(userEntity);
         UserDto response = modelMapper.map(saveUser, UserDto.class);

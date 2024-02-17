@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 		<cloudinary.version>1.37.0</cloudinary.version>
 		<modelmapper.version>3.1.1</modelmapper.version>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,6 +63,25 @@
 			<groupId>com.cloudinary</groupId>
 			<artifactId>cloudinary-http44</artifactId>
 			<version>${cloudinary.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
