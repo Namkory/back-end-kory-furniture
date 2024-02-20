@@ -56,8 +56,11 @@ public class JwtFilter extends OncePerRequestFilter {
         return null;
     }
 
+    //Hàm shouldNotFilter định nghĩa các đường dẫn không cần xác thực vẫn có thể truy cập dữ liệu
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getServletPath().startsWith("/api/v1/auth");
+        String servletPath = request.getServletPath();
+        return servletPath.startsWith("/api/v1/auth")
+                || servletPath.startsWith("/api/v1/products/get-all-products");
     }
 }

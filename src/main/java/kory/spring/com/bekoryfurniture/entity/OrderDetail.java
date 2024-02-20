@@ -20,13 +20,21 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "order_id")
+    @ManyToOne
+    @JoinColumn(name = "order", referencedColumnName = "id")
     private Orders order;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Products product;
+    @Column(name = "order_idddddd")
+    private int orderId;
+
+    @Column(name = "user_name")
+    private String userName;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "image")
+    private String image;
 
     @Column(name = "price")
     private BigDecimal price;

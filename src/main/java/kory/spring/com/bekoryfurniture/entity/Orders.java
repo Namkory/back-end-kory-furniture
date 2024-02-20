@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -52,7 +53,6 @@ public class Orders {
     @Column(name = "totalMoney")
     private BigDecimal totalMoney;
 
-    @OneToOne(mappedBy = "order")
-    private OrderDetail orderDetail;
-
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetails;
 }
