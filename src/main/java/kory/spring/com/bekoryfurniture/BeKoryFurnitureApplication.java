@@ -12,8 +12,5 @@ public class BeKoryFurnitureApplication {
 		SpringApplication.run(BeKoryFurnitureApplication.class, args);
 	}
 
-	@Bean
-	ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
+
 }

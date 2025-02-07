@@ -2,40 +2,30 @@ package kory.spring.com.bekoryfurniture.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "users")
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "full_name")
-    private String fullName;
-
-    @Column(name = "email")
-    private String email;
+    @Column(name = "user_name", unique = true)
+    private String userName;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "gender")
-    private String gender;
-
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @Column(name = "address")
-    private String address;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @Column(name = "list_role")
+    private Set<String> roles;
 }

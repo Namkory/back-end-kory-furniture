@@ -1,11 +1,11 @@
 package kory.spring.com.bekoryfurniture.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
@@ -13,21 +13,21 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "order_detail")
-public class OrderDetail {
+@Table(name = "comments")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "product_name")
-    private String productName;
+    @Column(name = "commenter_name")
+    private String commenterName;
 
     @Column(name = "image")
     private String image;
 
-    @Column(name = "price")
-    private String price;
+    @Column(name = "comment_content")
+    private String commentContent;
 
     @Column(name = "created_at")
     private String createdAt;
@@ -36,8 +36,8 @@ public class OrderDetail {
             CascadeType.DETACH,
             CascadeType.PERSIST,
             CascadeType.MERGE,
-            CascadeType.REFRESH
+            CascadeType.REFRESH,
     }, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private Orders order;
+    @JoinColumn(name = "products_id")
+    private Products product;
 }

@@ -1,18 +1,20 @@
 package kory.spring.com.bekoryfurniture.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Blob;
+import java.util.Set;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "products")
 public class Products {
 
     @Id
@@ -22,26 +24,44 @@ public class Products {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "price")
-    private Double price;
+    @Column(name = "thumbnail_data", columnDefinition = "text[]")
+    private String[] thumbnailData;
 
-    @Column(name = "discount")
-    private String discount;
+    @Column(name = "salePrice")
+    private String salePrice;
 
-    @Column(name = "description")
+    @Column(name = "establishedPrice")
+    private String establishedPrice;
+
+    @Column(name = "amount")
+    private int amount;
+
+    @Column(name = "size")
+    private String size;
+
+    @Lob
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-    @Column(name = "thumbnail")
-    private String thumbnail;
 
-    @ManyToOne
+    @Column(name = "created_at")
+    private String createdAt;
+
+    @ManyToOne(cascade = {
+            CascadeType.DETACH,
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+    }, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
+    @OneToMany(mappedBy = "product", cascade = {
+            CascadeType.DETACH,
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.REMOVE
+    }, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Comment> listComment;
 }

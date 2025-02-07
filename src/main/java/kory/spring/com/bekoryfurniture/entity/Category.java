@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "category")
 public class Category {
 
     @Id
@@ -20,4 +21,7 @@ public class Category {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "created_at")
+    private String createdAt;
 }

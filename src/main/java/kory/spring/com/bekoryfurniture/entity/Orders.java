@@ -1,10 +1,9 @@
 package kory.spring.com.bekoryfurniture.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,47 +11,49 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "orders")
 public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "customer_id")
+    private int customerId;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private Users user;
+    @Column(name = "customer_name")
+    private String customerName;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "products_id")
+    private int[] productsId;
 
-    @Column(name = "gender")
-    private String gender;
-
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "note")
-    private String note;
-
-    @Column(name = "order_date")
-    private LocalDateTime orderDate;
+    @Column(name = "total_money")
+    private String totalMoney;
 
     @Column(name = "status")
     private String status;
 
-    @Column(name = "totalMoney")
-    private BigDecimal totalMoney;
+    @Column(name = "payment_method")
+    private String paymentMethod;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderDetail> orderDetails;
+    @Column(name = "payment_id")
+    private String paymentId;
+
+    @Column(name = "order_date")
+    private String orderDate;
+
+    @OneToMany(mappedBy = "order", cascade = {
+            CascadeType.DETACH,
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.REMOVE
+    }, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<OrderDetail> listOrderDetail;
 }
