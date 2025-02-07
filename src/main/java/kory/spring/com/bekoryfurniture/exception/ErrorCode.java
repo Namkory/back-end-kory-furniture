@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
+    SUCCESSFUL(200, "Create new successful"),
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error"),
     KEY_INVALID(1001, "Invalid message key"),
     USER_TYPE_INVALID(401, "User type invalid"),
@@ -48,6 +49,8 @@ public enum ErrorCode {
     USER_IMAGE_REQUIRED(400, "User image required"),
     COMMENTER_NAME_REQUIRED(400, "Commenter name required"),
     COMMENT_CONTENT_REQUIRED(400, "Comment content required"),
+    CATEGORY_NAME_EXISTED(400, "Category name existed"),
+    NOT_FOUND_CATEGORY(400, "This category could not be found!!")
 
     ;
 
