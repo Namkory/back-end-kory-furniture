@@ -10,6 +10,6 @@ public class CategoryRequest {
 
     private int id;
 
-    @NotBlank(message = "name")
+    @NotBlank(message = "NAME_REQUIRED")
     private String name;
 }

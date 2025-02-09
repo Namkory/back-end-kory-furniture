@@ -30,8 +30,8 @@ public enum ErrorCode {
     STATUS_REQUIRED(400, "Status required"),
     EMAIL_REQUIRED(400, "Email required"),
     INCORRECT_EMAIL_FORMAT(400, "Incorrect email format"),
-    ADDRESS_REQUIRED(400, "address required"),
-    PHONE_REQUIRED(400, "phone required"),
+    ADDRESS_REQUIRED(400, "Address required"),
+    PHONE_REQUIRED(400, "Phone required"),
     SALE_PRICE_REQUIRED(400, "Sale price  required"),
     ESTABLISHED_PRICE_REQUIRED(400, "Established price required"),
     DESCRIPTION_REQUIRED(400, "Description required"),
@@ -55,7 +55,8 @@ public enum ErrorCode {
     COMMENT_CONTENT_REQUIRED(400, "Comment content required"),
     CATEGORY_NAME_EXISTED(400, "Category name existed"),
     NOT_FOUND_CATEGORY(400, "This category could not be found!!"),
-    NOT_FOUND_ADMIN(400, "Admin doesn't exist")
+    NOT_FOUND_ADMIN(400, "Admin doesn't exist"),
+    NOT_FOUND_CUSTOMER(400, "Customer doesn't exist")
 
     ;
 

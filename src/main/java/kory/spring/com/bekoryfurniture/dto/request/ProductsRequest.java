@@ -24,10 +24,10 @@ public class ProductsRequest {
     @NotNull(message = "AMOUNT_REQUIRED")
     private int amount;
 
-    @NotNull(message = "size")
+    @NotNull(message = "SIZE_REQUIRED")
     private String size;
 
-    @NotNull(message = "description")
+    @NotNull(message = "DESCRIPTION_REQUIRED")
     private String description;
 
     private int categoryId;
