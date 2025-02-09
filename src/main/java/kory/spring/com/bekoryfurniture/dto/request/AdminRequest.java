@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -16,8 +17,8 @@ public class AdminRequest {
     @NotBlank(message = "name")
     private String name;
 
-    @NotBlank(message = "image")
-    private String image;
+//    @NotBlank(message = "image")
+    private MultipartFile image;
 
     @NotBlank(message = "dob")
     private String dob;

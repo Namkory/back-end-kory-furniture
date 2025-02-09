@@ -27,6 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     private ModelMapper modelMapper;
 
     @Override
+    @Transactional
     public CategoryResponse createCategory(CategoryRequest request) {
 
         boolean exists = categoryRepo.existsByName(request.getName());
@@ -43,6 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public Page<CategoryResponse> getAllCategory(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
         Page<Category> categoryPage = categoryRepo.findAll(pageable);
@@ -55,9 +57,13 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryResponsesPage;
     }
 
+    @Override
     @Transactional
     public void deleteCategory(Integer categoryId) {
         categoryRepo.findById(categoryId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_CATEGORY));
         categoryRepo.deleteById(categoryId);
+
     }
+
+
 }

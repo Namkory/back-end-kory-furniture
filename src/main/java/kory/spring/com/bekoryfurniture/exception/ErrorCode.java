@@ -6,6 +6,10 @@ import lombok.Getter;
 public enum ErrorCode {
 
     SUCCESSFUL(200, "Create new successful"),
+    GET_BY_ID_SUCCESSFUL(200, "Get by id successful"),
+    UPDATE_SUCCESSFUL(200, "Update successful"),
+    DISABLE_ACCOUNT(200, "Account disabled successfully"),
+    DELETE_SUCCESSFUL(200, "Delete successful"),
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error"),
     KEY_INVALID(1001, "Invalid message key"),
     USER_TYPE_INVALID(401, "User type invalid"),
@@ -50,7 +54,8 @@ public enum ErrorCode {
     COMMENTER_NAME_REQUIRED(400, "Commenter name required"),
     COMMENT_CONTENT_REQUIRED(400, "Comment content required"),
     CATEGORY_NAME_EXISTED(400, "Category name existed"),
-    NOT_FOUND_CATEGORY(400, "This category could not be found!!")
+    NOT_FOUND_CATEGORY(400, "This category could not be found!!"),
+    NOT_FOUND_ADMIN(400, "Admin doesn't exist")
 
     ;
 

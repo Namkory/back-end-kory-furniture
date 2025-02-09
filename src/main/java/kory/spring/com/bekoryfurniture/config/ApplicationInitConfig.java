@@ -38,6 +38,7 @@ public class ApplicationInitConfig {
                 admin.setPassword(passwordEncoder.encode("kory"));
                 admin.setRoles(roles);
                 admin.setName("kory");
+                admin.setAddress("HCM");
                 admin.setImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzpWIBHvC9orthuHBdJ1RoqREiXtvmuh3izIcp9qUjpKOZKdeQS0wA3oM&s");
                 admin.setDob("7/02/2024");
                 admin.setGender("male");
