@@ -3,6 +3,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -14,7 +15,9 @@ public class ProductsRequest {
     private String name;
 
     @NotNull(message = "THUMBNAIL_REQUIRED")
-    private String[] thumbnailData;
+    private MultipartFile[] thumbnailData;
+
+    private String[] oldThumbnails;
 
     private String salePrice;
 

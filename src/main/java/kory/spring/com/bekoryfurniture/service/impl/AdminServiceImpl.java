@@ -149,8 +149,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void deleteAdmin(Integer adminId) {
-        adminRepo.findById(adminId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_ADMIN));
+        Admin admin = adminRepo.findById(adminId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_ADMIN));
         userRepo.deleteById(adminId);
         adminRepo.deleteById(adminId);
+        cloudinaryImageService.deleteImage(admin.getImage());
     }
 }

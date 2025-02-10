@@ -30,4 +30,27 @@ public class CloudinaryImageServiceImpl implements CloudinaryImageService {
         }
         return null;
     }
+
+    @Override
+    public void deleteImage(String imageUrl) {
+        try {
+            String publicId = extractPublicId(imageUrl);
+            if (publicId != null) {
+                Map result = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+                System.out.println("Deleted image: " + result);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting image from Cloudinary", e);
+        }
+    }
+
+    private String extractPublicId(String imageUrl) {
+        try {
+            String[] parts = imageUrl.split("/");
+            String fileName = parts[parts.length - 1];
+            return fileName.split("\\.")[0];
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

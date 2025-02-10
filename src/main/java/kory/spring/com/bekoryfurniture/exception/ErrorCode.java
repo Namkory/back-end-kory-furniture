@@ -55,8 +55,11 @@ public enum ErrorCode {
     COMMENT_CONTENT_REQUIRED(400, "Comment content required"),
     CATEGORY_NAME_EXISTED(400, "Category name existed"),
     NOT_FOUND_CATEGORY(400, "This category could not be found!!"),
+    NOT_FOUND_PRODUCT(400, "This product could not be found!!"),
     NOT_FOUND_ADMIN(400, "Admin doesn't exist"),
-    NOT_FOUND_CUSTOMER(400, "Customer doesn't exist")
+    NOT_FOUND_CUSTOMER(400, "Customer doesn't exist"),
+    INVALID_CATEGORY_ID(400, "Invalid category id"),
+
 
     ;
 

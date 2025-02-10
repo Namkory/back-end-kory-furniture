@@ -1,14 +1,11 @@
 package kory.spring.com.bekoryfurniture.service.impl;
 
 import kory.spring.com.bekoryfurniture.dto.request.CustomerRequest;
-import kory.spring.com.bekoryfurniture.dto.response.AdminResponse;
 import kory.spring.com.bekoryfurniture.dto.response.CustomerResponse;
-import kory.spring.com.bekoryfurniture.entity.Admin;
 import kory.spring.com.bekoryfurniture.entity.Customer;
 import kory.spring.com.bekoryfurniture.enums.Role;
 import kory.spring.com.bekoryfurniture.exception.AppException;
 import kory.spring.com.bekoryfurniture.exception.ErrorCode;
-import kory.spring.com.bekoryfurniture.repository.AdminRepo;
 import kory.spring.com.bekoryfurniture.repository.CustomerRepo;
 import kory.spring.com.bekoryfurniture.repository.UserRepo;
 import kory.spring.com.bekoryfurniture.service.CustomerService;
@@ -154,8 +151,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public void deleteCustomer(Integer customerId) {
-        customerRepo.findById(customerId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_CUSTOMER));
+        Customer customer = customerRepo.findById(customerId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_CUSTOMER));
         userRepo.deleteById(customerId);
         customerRepo.deleteById(customerId);
+        cloudinaryImageService.deleteImage(customer.getImage());
     }
 }
