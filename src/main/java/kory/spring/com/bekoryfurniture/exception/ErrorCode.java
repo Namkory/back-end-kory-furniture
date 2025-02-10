@@ -59,6 +59,8 @@ public enum ErrorCode {
     NOT_FOUND_ADMIN(400, "Admin doesn't exist"),
     NOT_FOUND_CUSTOMER(400, "Customer doesn't exist"),
     INVALID_CATEGORY_ID(400, "Invalid category id"),
+    INVALID_CUSTOMER_ID_OR_PRODUCT_ID(400, "Invalid customerId or productId"),
+    NOT_FOUND_SHOPPING_CART(400, "This Shopping cart item could not be found!!")
 
 
     ;
