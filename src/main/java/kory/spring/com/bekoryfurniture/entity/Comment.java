@@ -20,14 +20,20 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "commenter_name")
-    private String commenterName;
+    @Column(name = "customer_name")
+    private String customerName;
+
+    @Column(name = "customer_Id")
+    private int customerId;
 
     @Column(name = "image")
     private String image;
 
     @Column(name = "comment_content")
     private String commentContent;
+
+    @Column(name = "is_edit")
+    private boolean isEdit;
 
     @Column(name = "created_at")
     private String createdAt;

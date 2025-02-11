@@ -51,7 +51,7 @@ public enum ErrorCode {
     CONTENT_REQUIRED(400, "Content required"),
     DATE_REQUIRED(400, "Date required"),
     USER_IMAGE_REQUIRED(400, "User image required"),
-    COMMENTER_NAME_REQUIRED(400, "Commenter name required"),
+    COMMENTER_NAME_REQUIRED(400, "Customer name required"),
     COMMENT_CONTENT_REQUIRED(400, "Comment content required"),
     CATEGORY_NAME_EXISTED(400, "Category name existed"),
     NOT_FOUND_CATEGORY(400, "This category could not be found!!"),
@@ -59,11 +59,15 @@ public enum ErrorCode {
     NOT_FOUND_ADMIN(400, "Admin doesn't exist"),
     NOT_FOUND_CUSTOMER(400, "Customer doesn't exist"),
     NOT_FOUND_ORDER(400, "Order doesn't exist"),
+    NOT_FOUND_COMMENT(400, "Comment doesn't exist"),
     INVALID_CATEGORY_ID(400, "Invalid category id"),
+    INVALID_PRODUCT_ID_OR_CUSTOMER_ID(400, "Invalid product id or customer id"),
     INVALID_CUSTOMER_ID_OR_PRODUCT_ID(400, "Invalid customerId or productId"),
     NOT_FOUND_SHOPPING_CART(400, "This Shopping cart item could not be found!!"),
     INVALID_CUSTOMER_ID_OR_LIST_PRODUCT_ID(400, "Invalid customer id or array product id can't be null"),
-    OUT_OF_STOCK(400, "Out of stock - ");
+    OUT_OF_STOCK(400, "Out of stock - "),
+    UNAUTHORIZED (400, "You do not have permission to delete this comment."),
+
 
 
     ;

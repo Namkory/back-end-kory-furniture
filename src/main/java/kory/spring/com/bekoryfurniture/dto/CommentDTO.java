@@ -10,16 +10,18 @@ public class CommentDTO {
 
     private int id;
 
-    @NotBlank(message = "COMMENTER_NAME_REQUIRED")
-    private String commenterName;
+    private String customerName;
 
-    @NotBlank(message = "IMAGE_REQUIRED")
     private String image;
 
     @NotBlank(message = "COMMENT_CONTENT_REQUIRED")
     private String commentContent;
 
+    private boolean isEdit;
+
     private String createdAt;
 
     private int productId;
+
+    private int customerId;
 }
