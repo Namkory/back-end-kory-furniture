@@ -67,6 +67,7 @@ public enum ErrorCode {
     INVALID_CUSTOMER_ID_OR_LIST_PRODUCT_ID(400, "Invalid customer id or array product id can't be null"),
     OUT_OF_STOCK(400, "Out of stock - "),
     UNAUTHORIZED (400, "You do not have permission to delete this comment."),
+    ACCOUNT_DISABLED(400, "This account has been disabled")
 
 
 

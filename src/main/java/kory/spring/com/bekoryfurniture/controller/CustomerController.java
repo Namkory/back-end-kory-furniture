@@ -82,7 +82,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    ApiResponse<?> deleteAdmin(@PathVariable("id") Integer customerId){
+    ApiResponse<?> deleteCustomer(@PathVariable("id") Integer customerId){
         customerService.deleteCustomer(customerId);
         ApiResponse<?> response = new ApiResponse<>();
         response.setCode(ErrorCode.DELETE_SUCCESSFUL.getCode());

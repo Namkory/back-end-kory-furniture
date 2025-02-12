@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/kory_furniture
+    username: postgres
+    password: 123456
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+jwt:
+  signerKey: IGnnbU1ACaOXN6hjMXslkh/B0YTZAnqAk1ezbfvmG9D7L8lklL3DqYBxU7ReFv3s
+
+stripe:
+  api:
+    secretKey: sk_test_51QF5BKKb2RoKbGIVPeBla2H659Mepf6SGOsTCUvF5bUGNIarMDPOvLvDk9o19fpibRyLTiOKzWkbeymHx5lnt0uC00BDWBwTaK
