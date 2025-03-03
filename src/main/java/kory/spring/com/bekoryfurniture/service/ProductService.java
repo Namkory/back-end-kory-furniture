@@ -4,6 +4,7 @@ import kory.spring.com.bekoryfurniture.dto.request.AdminRequest;
 import kory.spring.com.bekoryfurniture.dto.request.ProductsRequest;
 import kory.spring.com.bekoryfurniture.dto.response.AdminResponse;
 import kory.spring.com.bekoryfurniture.dto.response.ProductsResponse;
+import kory.spring.com.bekoryfurniture.entity.Products;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface ProductService {
     void deleteProduct(Integer productId);
 
     List<ProductsResponse> searchProductsByName(String name);
+
+    List<ProductsResponse> findByCategoryId(int categoryId);
+
+    List<ProductsResponse> getAllProductNoPagination();
 }

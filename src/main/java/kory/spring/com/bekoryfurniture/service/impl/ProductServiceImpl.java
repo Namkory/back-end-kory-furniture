@@ -131,4 +131,23 @@ public class ProductServiceImpl implements ProductService {
                 .map(product -> modelMapper.map(product, ProductsResponse.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional
+    public List<ProductsResponse> findByCategoryId(int categoryId) {
+        List<Products> listProduct = productRepo.findByCategoryId(categoryId);
+
+        return listProduct.stream()
+                .map(product -> modelMapper.map(product, ProductsResponse.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<ProductsResponse> getAllProductNoPagination() {
+        List<Products> listProductEntity = productRepo.findAll();
+        return listProductEntity.stream()
+                .map(product -> modelMapper.map(product, ProductsResponse.class))
+                .collect(Collectors.toList());
+    }
 }

@@ -53,6 +53,16 @@ public class ProductController {
         return res;
     }
 
+    @GetMapping("/category/{categoryId}")
+    public List<ProductsResponse> getProductsByCategory(@PathVariable int categoryId) {
+        return productService.findByCategoryId(categoryId);
+    }
+
+    @GetMapping("/no-pagination")
+    public List<ProductsResponse> getProductsNoPagination() {
+        return productService.getAllProductNoPagination();
+    }
+
     @PutMapping
     ApiResponse<ProductsResponse> updateNewProduct(@ModelAttribute @Valid ProductsRequest request){
         ProductsResponse response = productService.updateProduct(request);

@@ -5,6 +5,8 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import kory.spring.com.bekoryfurniture.dto.request.ChangePasswordRequest;
 import kory.spring.com.bekoryfurniture.dto.request.LoginRequest;
 import kory.spring.com.bekoryfurniture.dto.request.LogoutRequest;
@@ -17,6 +19,7 @@ import kory.spring.com.bekoryfurniture.entity.InvalidatedToken;
 import kory.spring.com.bekoryfurniture.entity.Users;
 import kory.spring.com.bekoryfurniture.exception.AppException;
 import kory.spring.com.bekoryfurniture.exception.ErrorCode;
+import kory.spring.com.bekoryfurniture.repository.CustomerRepo;
 import kory.spring.com.bekoryfurniture.repository.InvalidatedTokenRepository;
 import kory.spring.com.bekoryfurniture.repository.UserRepo;
 import kory.spring.com.bekoryfurniture.service.LoginService;
@@ -25,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +40,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.StringJoiner;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -51,10 +54,21 @@ public class LoginServiceImpl implements LoginService {
     private UserRepo userRepo;
 
     @Autowired
+    private CustomerRepo customerRepo;
+
+    @Autowired
     private InvalidatedTokenRepository invalidatedTokenRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     @Override
     @Transactional
@@ -162,6 +176,31 @@ public class LoginServiceImpl implements LoginService {
         }
     }
 
+    @Override
+    @Transactional
+    public void forgotPassword(String email, String subject) {
+        try {
+            Customer customerEntity = customerRepo.findByEmail(email)
+                    .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXIST));
+            var randomPassword = generateRandomString(6);
+
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setFrom("nguyenhoainamkory@gmail.com");
+            helper.setTo(email);
+            helper.setSubject(subject);
+            helper.setText(randomPassword, true);
+            mailSender.send(message);
+            System.out.println("Email sent successfully!");
+
+            customerEntity.setPassword(bCryptPasswordEncoder.encode(randomPassword));
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String generateToken(Users user){
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
 
@@ -196,5 +235,17 @@ public class LoginServiceImpl implements LoginService {
         }
 
         return stringJoiner.toString();
+    }
+
+    public String generateRandomString(int length) {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            sb.append(CHARACTERS.charAt(index));
+        }
+
+        return sb.toString();
     }
 }

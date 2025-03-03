@@ -68,4 +68,13 @@ public class LoginController {
 
         return response;
     }
+
+    @PostMapping("/forgot-password")
+    public ApiResponse<?> handleForgotPassword(@RequestParam String email){
+        loginService.forgotPassword(email, "Change password");
+        ApiResponse<?> response = new ApiResponse<>();
+        response.setCode(200);
+        response.setMessage("Change password successful");
+        return response;
+    }
 }

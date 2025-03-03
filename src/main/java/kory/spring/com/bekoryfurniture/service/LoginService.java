@@ -22,4 +22,6 @@ public interface LoginService {
     void logout(LogoutRequest request) throws ParseException, JOSEException;
 
     void handleChangPassword(ChangePasswordRequest request);
+
+    void forgotPassword(String email, String subject);
 }

@@ -9,6 +9,20 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nguyenhoainamkory@gmail.com
+    password: tgdyurccaeopjgbt
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: "*"
 
 jwt:
   signerKey: IGnnbU1ACaOXN6hjMXslkh/B0YTZAnqAk1ezbfvmG9D7L8lklL3DqYBxU7ReFv3s

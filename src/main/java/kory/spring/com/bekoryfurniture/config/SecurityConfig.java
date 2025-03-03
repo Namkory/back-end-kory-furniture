@@ -38,8 +38,11 @@ public class SecurityConfig {
             "/api/v2/customer/{id}",
             "/api/v2/comment",
             "/api/v2/product",
+            "/api/v2/product/no-pagination",
             "/api/v2/product/{id}",
-            "/api/v2/shopping-cart/customer/{customerId}"
+            "/api/v2/product/category/{categoryId}",
+            "/api/v2/shopping-cart/customer/{customerId}",
+
     };
 
     private final String[] POST_PUBLIC_ENDPOINTS = {
@@ -51,7 +54,9 @@ public class SecurityConfig {
             "/api/v2/customer",
             "/api/v2/order",
             "/api/create-payment-intent",
-            "/api/v2/shopping-cart"
+            "/api/v2/shopping-cart",
+            "/api/v2/send-email",
+            "/api/auth/forgot-password"
     };
 
     private final String[] PUT_PUBLIC_ENDPOINTS = {
@@ -123,7 +128,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5000"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000/", "http://localhost:5000"));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
