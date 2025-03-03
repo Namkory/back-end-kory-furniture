@@ -1,5 +1,7 @@
 package kory.spring.com.bekoryfurniture.service.impl;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import kory.spring.com.bekoryfurniture.dto.OrderDTO;
 import kory.spring.com.bekoryfurniture.entity.Customer;
 import kory.spring.com.bekoryfurniture.entity.OrderDetail;
@@ -14,9 +16,12 @@ import kory.spring.com.bekoryfurniture.repository.ProductRepo;
 import kory.spring.com.bekoryfurniture.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,10 +39,11 @@ public class OrderServiceImpl implements OrderService {
     private ProductRepo productRepo;
     private CustomerRepo customerRepo;
     private OrderDetailRepo orderDetailRepo;
+    private JavaMailSender mailSender;
 
     @Override
     @Transactional
-    public OrderDTO createNewOrder(OrderDTO request) {
+    public OrderDTO createNewOrder(OrderDTO request) throws MessagingException {
         if (request.getCustomerId() == 0 || request.getProductsId() == null){
             throw  new AppException(ErrorCode.INVALID_CUSTOMER_ID_OR_LIST_PRODUCT_ID);
         }
@@ -73,6 +79,20 @@ public class OrderServiceImpl implements OrderService {
         }
         orderEntity.setListOrderDetail(orderDetailsList);
         orderRepo.save(orderEntity);
+
+        //send gratitude email
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        helper.setFrom("nguyenhoainamkory@gmail.com");
+        helper.setTo(customer.getEmail());
+        helper.setSubject("Thanks");
+        helper.setText("Kory Furniture xin chân thành cảm ơn Quý Khách " +
+                "đã tin tưởng và lựa chọn sản phẩm của chúng tôi. Chúng tôi rất" +
+                " trân trọng sự ủng hộ của Quý Khách và hy vọng rằng sản phẩm" +
+                " sẽ mang đến sự hài lòng và tiện nghi cho không gian của bạn.", true);
+
+        mailSender.send(message);
 
         OrderDTO res = modelMapper.map(orderEntity, OrderDTO.class);
         res.setListOrderDetail(orderEntity.getListOrderDetail());
