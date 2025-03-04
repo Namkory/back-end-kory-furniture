@@ -24,6 +24,13 @@ spring:
           ssl:
             trust: "*"
 
+vnpay:
+  tmnCode: U70E11VJ
+  hashSecret: 1TEIMA5VO02KZ8AIWPQJMDIEFQXYTFB0
+  payUrl: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+  returnUrl: http://localhost:3000/pay
+
+
 jwt:
   signerKey: IGnnbU1ACaOXN6hjMXslkh/B0YTZAnqAk1ezbfvmG9D7L8lklL3DqYBxU7ReFv3s
 

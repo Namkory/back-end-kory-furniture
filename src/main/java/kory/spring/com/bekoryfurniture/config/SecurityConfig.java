@@ -42,6 +42,7 @@ public class SecurityConfig {
             "/api/v2/product/{id}",
             "/api/v2/product/category/{categoryId}",
             "/api/v2/shopping-cart/customer/{customerId}",
+            "/api/vnpay-callback"
 
     };
 
@@ -56,7 +57,8 @@ public class SecurityConfig {
             "/api/create-payment-intent",
             "/api/v2/shopping-cart",
             "/api/v2/send-email",
-            "/api/auth/forgot-password"
+            "/api/auth/forgot-password",
+            "/api/create"
     };
 
     private final String[] PUT_PUBLIC_ENDPOINTS = {

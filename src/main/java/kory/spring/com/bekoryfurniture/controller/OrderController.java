@@ -1,5 +1,6 @@
 package kory.spring.com.bekoryfurniture.controller;
 
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import kory.spring.com.bekoryfurniture.dto.OrderDTO;
 import kory.spring.com.bekoryfurniture.dto.response.AdminResponse;
@@ -20,7 +21,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping
-    ApiResponse<OrderDTO> createNewOrder(@RequestBody @Valid OrderDTO request){
+    ApiResponse<OrderDTO> createNewOrder(@RequestBody @Valid OrderDTO request) throws MessagingException {
         OrderDTO response = orderService.createNewOrder(request);
         ApiResponse<OrderDTO> res = new ApiResponse<>();
         res.setCode(ErrorCode.SUCCESSFUL.getCode());
