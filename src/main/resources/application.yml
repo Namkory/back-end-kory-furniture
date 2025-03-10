@@ -23,6 +23,11 @@ spring:
             required: true
           ssl:
             trust: "*"
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    api-docs:
+      path: /v3/api-docs
 
 vnpay:
   tmnCode: U70E11VJ

@@ -33,7 +33,18 @@ public class SecurityConfig {
     @Autowired
     private CustomerJwtDecoder customerJwtDecoder;
 
+    private final String[] SWAGGER_WHITELIST = {
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/swagger-ui.html",
+            "/swagger-resources/**",
+            "/webjars/**",
+            "/swagger-ui/index.html",
+    };
+
+
     private final String[] GET_PUBLIC_ENDPOINTS = {
+            "/hello",
             "/api/v2/category",
             "/api/v2/customer/{id}",
             "/api/v2/comment",
@@ -93,7 +104,8 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(request ->
 //                        request.requestMatchers("/**").permitAll()
-                        request.requestMatchers(HttpMethod.GET, GET_ADMIN_ENDPOINTS)
+                        request.requestMatchers(SWAGGER_WHITELIST).permitAll()
+                                .requestMatchers(HttpMethod.GET, GET_ADMIN_ENDPOINTS)
                                 .hasAnyAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, POST_ADMIN_ENDPOINTS)
                                 .hasAnyAuthority("ROLE_ADMIN")
